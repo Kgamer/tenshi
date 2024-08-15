@@ -4,7 +4,8 @@
   "description": "Ami Tenshi's bot",
   "main": "./src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-modules src/index.mjs "
   },
   "keywords": [],
   "author": "Soes",
@@ -15,7 +16,6 @@
     "anime-actions": "^2.1.2",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
-    "mongoose": "^8.5.2",
-    "node-schedule": "^2.1.1"
+    "mongoose": "^8.5.2"
   }
 }
