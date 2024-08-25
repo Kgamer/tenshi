@@ -1,6 +1,5 @@
 const { isMessageInstance } = require('@sapphire/discord.js-utilities');
 const { Command } = require('@sapphire/framework');
-const schedule = require("node-schedule");
 const { EmbedBuilder } = require('discord.js')
 
 class MbsCheckCommand extends Command {
