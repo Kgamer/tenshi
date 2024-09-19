@@ -1,6 +1,5 @@
 const { isMessageInstance } = require('@sapphire/discord.js-utilities');
 const { Command } = require('@sapphire/framework');
-const schedule = require("node-schedule");
 
 class MbsCommand extends Command {
   constructor(context, options) {
@@ -40,8 +39,8 @@ class MbsCommand extends Command {
       const mongoose = require('mongoose')
 
       //import mongo schemas
-      const mbsSchema = require('../schema/premium-schema')    
-      const premiumSchema = require('../schema/membership-schema')
+      const premiumSchema = require('../schema/premium-schema')    
+      const mbsSchema = require('../schema/membership-schema')
   
       //parsing command options
       let member = interaction.options.getMember('member')

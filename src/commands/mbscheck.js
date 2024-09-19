@@ -42,7 +42,8 @@ class MbsCheckCommand extends Command {
           
           memberCheck.send(`<@${memberId}>, gói hội viên của bạn trong server Ami Tenshi đã hết hạn, vui lòng cập nhật gói hội viên tại <#1208952939654156308>. Bạn có thể xem hướng dẫn xác minh tại <#1208953027554443294>`)
           console.log(`removed ${memberId} mbs role`)
-          const mbsRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá tiểu thiên sứ của  <@${memberId}>`).setImage(`${(await memberCheck).avatarURL()}`);
+          const mbsRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá tiểu thiên sứ của ${(await memberCheck).username}`).setImage(`${(await memberCheck).avatarURL()}`).setFooter({ text: `@<${memberId}>`});
+
           return (await (await guild).channels.fetch('1270328191243915265')).send({embeds: [mbsRemoveEmbed]});
         }
       }
@@ -58,7 +59,7 @@ class MbsCheckCommand extends Command {
     
             memberCheck.send(`<@${memberId}>, gói hội viên của bạn trong server Ami Tenshi đã hết hạn, vui lòng cập nhật gói hội viên tại <#1208952939654156308>. Bạn có thể xem hướng dẫn xác minh tại <#1208953027554443294>`)
             console.log(`removed ${memberId} premium role`)
-            const premiumRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá thiên sứ cao cấp của  <@${memberId}>`).setImage(`${(await memberCheck).avatarURL()}`);
+            const premiumRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá tiểu thiên sứ của ${(await memberCheck).username}`).setImage(`${(await memberCheck).avatarURL()}`).setFooter({ text: `@<${memberId}>`});
             return await ((await guild).channels.fetch('1270328191243915265')).send({embeds: [premiumRemoveEmbed]});
           }
         }
