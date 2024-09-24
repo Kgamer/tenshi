@@ -1,5 +1,5 @@
 const { SapphireClient } = require('@sapphire/framework');
-const { Discord, GatewayIntentBits, EmbedBuilder, ActivityType} = require('discord.js');
+const { Discord, GatewayIntentBits, EmbedBuilder, ActivityType, channelMention, roleMention, userMention, Events} = require('discord.js');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 
@@ -11,10 +11,12 @@ const client = new SapphireClient({
 });
 
 
-
 (async () => {
   await mongoose.connect(process.env.MONGOKEY).catch(console.error)
 })();
+client.once(Events.ClientReady, readyClient => {
+  client.user.setPresence({ activities: [{ name: 'Ami Tenshi', type: ActivityType.Watching }], status: 'dnd' });
+});
 client.login(process.env.TOKEN);
 
 
@@ -43,7 +45,7 @@ const checkTime = async () => {
       console.log(`removing ${memberId} mbs role`)
       
       memberCheck.send(`<@${memberId}>, gói hội viên của bạn trong server Ami Tenshi đã hết hạn, vui lòng cập nhật gói hội viên tại <#1208952939654156308>. Bạn có thể xem hướng dẫn xác minh tại <#1208953027554443294>`)
-        const mbsRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá tiểu thiên sứ của ${(memberCheck).username}`).setImage(`${(memberCheck).avatarURL()}`).setFooter({ text: `@<${memberId}>`, iconURL: `${(memberCheck).avatarURL()}`});
+        const mbsRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá tiểu thiên sứ của ${(memberCheck).username}`).setImage(`${(memberCheck).avatarURL()}`).setFooter({ text: `<@${userMention(memberId)}>`, iconURL: `${(memberCheck).avatarURL()}`});
         (await (await guild).channels.fetch('1270328191243915265')).send({embeds: [mbsRemoveEmbed]});
     }
   }
@@ -59,7 +61,7 @@ const checkTime = async () => {
         console.log(`removing ${memberId} premium role`)
 
         memberCheck.send(`<@${memberId}>, gói hội viên của bạn trong server Ami Tenshi đã hết hạn, vui lòng cập nhật gói hội viên tại <#1208952939654156308>. Bạn có thể xem hướng dẫn xác minh tại <#1208953027554443294>`)
-        const premiumRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá thiên sứ cao cấp của ${(memberCheck).username}`).setImage(`${(memberCheck).avatarURL()}`).setFooter({ text: `@<${memberId}>`, iconURL: `${(memberCheck).avatarURL()}`});
+        const premiumRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá thiên sứ cao cấp của ${(memberCheck).username}`).setImage(`${(memberCheck).avatarURL()}`).setFooter({ text: `<@${userMention(memberId)}>`, iconURL: `${(memberCheck).avatarURL()}`});
         (await (await guild).channels.fetch('1270328191243915265')).send({embeds: [premiumRemoveEmbed]});
       }
     }

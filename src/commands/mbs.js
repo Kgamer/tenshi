@@ -47,7 +47,15 @@ class MbsCommand extends Command {
       let expireDate = interaction.options.getString('date').split('/')
       let mbsOption = interaction.options.getString('type')
 
-      //Check the type of membership
+      //check if the date inputed are right
+      if ( Number(expireDate[0]) > 30 || Number(expireDate[0]) < 1){
+        return interaction.reply('Số ngày không hợp lệ')
+      } else if (Number(expireDate[1]) > 12 || Number(expireDate[1]) < 1){
+        return interaction.reply('Số tháng không hợp lệ')
+      } else if (Number(expireDate[2]) <= 2024){
+        return interaction.reply('Số năm không hợp lệ')
+      } else {
+        //Check the type of membership
       if (mbsOption === 'membership') {
         const userMbs = await mbsSchema.findOne({memberId: member.id,})
         // Check if mention user already has the membership from DB
@@ -61,9 +69,10 @@ class MbsCommand extends Command {
             //checkout
             return interaction.reply({content: `Cá nhân này chưa có role ***Membership*** nên tao add cho r đấy, biết ơn đi mày. Hết hạn ngày ${expireDate[0]}/${expireDate[1]}/${expireDate[2]}`})
         } else {
-            let { date } = userMbs
+            userMbs.date = `${expireDate[1]}/${expireDate[0]}/${expireDate[2]}`;
+            await userMbs.save();
             //checkout
-            return interaction.reply({content: `Cá nhân này có sẵn ***Membership*** rồi, đợi nó hết rồi dùng lại nhé (${date})`})
+            return interaction.reply({content: `Đã update ***Membership*** cho ${member.user.username}. ${expireDate[0]}/${expireDate[1]}/${expireDate[2]}`})
         }
       } else if (mbsOption === 'premium') {
         const userMbs = await premiumSchema.findOne({memberId: member.id,})
@@ -79,15 +88,17 @@ class MbsCommand extends Command {
           //checkout
           return interaction.reply({content: `Cá nhân này chưa có role ***Thiên sứ cao cấp*** nên tao add cho r đấy, biết ơn đi mày. Hết hạn ngày ${expireDate[0]}/${expireDate[1]}/${expireDate[2]}`})
       } else {
-          let { date } = userMbs
-          //checkout
-          return interaction.reply({content: `Cá nhân này có sẵn ***Thiên sứ cao cấp*** rồi, đợi họ hết rồi dùng lại nhé (${date})`})
+        userMbs.date = `${expireDate[1]}/${expireDate[0]}/${expireDate[2]}`;
+        await userMbs.save();
+        //checkout
+        return interaction.reply({content: `Đã update ***Thiên sứ cao cấp*** cho ${member.user.username}. ${expireDate[0]}/${expireDate[1]}/${expireDate[2]}`})
       }
       }
+      }
+
+      
       
   } else {interaction.reply('cậu chưa có role mod á, nên không dùng đc cái lệnh này đâu á, vậy nên đừng dùng nha, lag lắm :3')}
-
-
   }
 }
 
