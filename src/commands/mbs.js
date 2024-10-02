@@ -48,11 +48,11 @@ class MbsCommand extends Command {
       let mbsOption = interaction.options.getString('type')
 
       //check if the date inputed are right
-      if ( Number(expireDate[0]) > 30 || Number(expireDate[0]) < 1){
+      if ( Number(expireDate[0]) > 31 || Number(expireDate[0]) < 1){
         return interaction.reply('Số ngày không hợp lệ')
       } else if (Number(expireDate[1]) > 12 || Number(expireDate[1]) < 1){
         return interaction.reply('Số tháng không hợp lệ')
-      } else if (Number(expireDate[2]) <= 2024){
+      } else if (Number(expireDate[2]) < 2024){
         return interaction.reply('Số năm không hợp lệ')
       } else {
         //Check the type of membership
