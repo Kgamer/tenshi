@@ -45,8 +45,8 @@ const checkTime = async () => {
       console.log(`removing ${memberId} mbs role`)
       
       memberCheck.send(`<@${memberId}>, gói hội viên của bạn trong server Ami Tenshi đã hết hạn, vui lòng cập nhật gói hội viên tại <#1208952939654156308>. Bạn có thể xem hướng dẫn xác minh tại <#1208953027554443294>`)
-        const mbsRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá tiểu thiên sứ của ${(memberCheck).username}`).setImage(`${(memberCheck).avatarURL()}`).setFooter({ text: `<@${userMention(memberId)}>`, iconURL: `${(memberCheck).avatarURL()}`});
-        (await (await guild).channels.fetch('1270328191243915265')).send({embeds: [mbsRemoveEmbed]});
+        const mbsRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá tiểu thiên sứ của ${(memberCheck).username}`).setImage(`${(memberCheck).avatarURL()}`).setFooter({ text: `${userMention(memberId)}`, iconURL: `${(memberCheck).avatarURL()}`});
+        (await (await guild).channels.fetch('1270328191243915265')).send({content: `${userMention(memberId)}`,embeds: [mbsRemoveEmbed]});
     }
   }
   for (const result of userPremium) {
@@ -62,7 +62,7 @@ const checkTime = async () => {
 
         memberCheck.send(`<@${memberId}>, gói hội viên của bạn trong server Ami Tenshi đã hết hạn, vui lòng cập nhật gói hội viên tại <#1208952939654156308>. Bạn có thể xem hướng dẫn xác minh tại <#1208953027554443294>`)
         const premiumRemoveEmbed = new EmbedBuilder().setTitle(`Đã xoá thiên sứ cao cấp của ${(memberCheck).username}`).setImage(`${(memberCheck).avatarURL()}`).setFooter({ text: `<@${userMention(memberId)}>`, iconURL: `${(memberCheck).avatarURL()}`});
-        (await (await guild).channels.fetch('1270328191243915265')).send({embeds: [premiumRemoveEmbed]});
+        (await (await guild).channels.fetch('1270328191243915265')).send({content: `${userMention(memberId)}`,embeds: [premiumRemoveEmbed]});
       }
     }
   }
